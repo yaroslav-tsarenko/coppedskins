@@ -20,7 +20,11 @@ const num = (def: number) =>
     .transform((v) => (v == null || v === "" ? def : Number(v)))
     .pipe(z.number().finite());
 
-const schema = z.object({
+// Per-field schemas so that reading one variable never forces validation of an
+// unrelated one. This matters at build/prerender time: rendering a page that
+// only needs non-secret config (e.g. SIH_APP_ID, which has a default) must not
+// require the SIH_API_KEY / CRON_SECRET secrets that are absent during build.
+const shape = {
   // ── SIH ──────────────────────────────────────────
   SIH_API_KEY: z.string().min(1, "SIH_API_KEY is required"),
   SIH_API_BASE: z.string().url().default("https://api.sih.market/api/v1"),
@@ -40,31 +44,30 @@ const schema = z.object({
   // ── Telegram alerts (optional) ───────────────────
   ALERT_TELEGRAM_BOT_TOKEN: z.string().optional(),
   ALERT_TELEGRAM_CHAT_ID: z.string().optional(),
-});
+} as const;
 
+const schema = z.object(shape);
 type Env = z.infer<typeof schema>;
 
-let cached: Env | null = null;
+const cache = new Map<keyof Env, unknown>();
 
-// Lazily parse so that importing a module that transitively touches env does not
-// crash unrelated build steps; the first real access validates.
-export function getEnv(): Env {
-  if (cached) return cached;
-  const parsed = schema.safeParse(process.env);
+// Validate a single variable on first access. A required-but-missing secret
+// still fails loudly — but only when that specific secret is actually read.
+function readEnv<K extends keyof Env>(key: K): Env[K] {
+  if (cache.has(key)) return cache.get(key) as Env[K];
+  const parsed = shape[key].safeParse(process.env[key as string]);
   if (!parsed.success) {
-    const issues = parsed.error.issues
-      .map((i) => `  - ${i.path.join(".") || "(root)"}: ${i.message}`)
-      .join("\n");
-    throw new Error(`Invalid environment configuration:\n${issues}`);
+    const msg = parsed.error.issues.map((i) => i.message).join("; ");
+    throw new Error(`Invalid environment configuration:\n  - ${String(key)}: ${msg}`);
   }
-  cached = parsed.data;
-  return cached;
+  cache.set(key, parsed.data);
+  return parsed.data as Env[K];
 }
 
 // Convenience proxy so callers can write `env.SIH_API_KEY` while still
 // validating on first access.
 export const env: Env = new Proxy({} as Env, {
   get(_t, prop: string) {
-    return getEnv()[prop as keyof Env];
+    return readEnv(prop as keyof Env);
   },
 });
