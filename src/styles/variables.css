@@ -1,0 +1,332 @@
+/*
+ * Coppedskins — "Drop District" CS2 skins store design tokens.
+ *
+ * Concept: rare CS2 skins are the sneakers of gaming — coveted, collected,
+ * flexed, resold. So the store borrows its energy from streetwear drop culture
+ * and limited-release retail. The canvas is a bright concrete gallery; each
+ * skin is presented like a limited release — poster typography, release-style
+ * cards, drop timers, condition labels styled like authentication tags. One
+ * heat orange-red marks drops, deals and CTAs like a SALE sticker on a
+ * release wall. Street-smart but disciplined: never graffiti kitsch.
+ *
+ * Surfaces are flat with crisp 1px rules; elevation exists only as a small
+ * lift with a hard, low-alpha shadow — the crispness of a printed poster.
+ *
+ * Token NAMES are kept stable so every existing component keeps working while
+ * the palette is fully re-skinned. Consumed by @theme in globals.css. Light
+ * ("Gallery") is the primary, default theme; "After Hours" (poster-black) is
+ * a first-class opt-in.
+ */
+
+/* ── DEFAULT (light concrete gallery) — primary theme ──────────────────── */
+:root {
+  /* ── Heat — the signal accent. Drops, deals, CTAs, active states ─────
+     Two inks on purpose: `primary` is the poster heat used for stickers,
+     rules and plates that carry BLACK type (5.9:1); `primary-strong` is the
+     darker press ink used wherever WHITE type sits on the fill (4.9:1), so
+     every button clears AA rather than only large-text AA. */
+  --color-primary: #F04E23;          /* poster heat — stickers, rules, marks */
+  --color-primary-strong: #D13F16;   /* press heat — fills that carry white type */
+  --color-primary-hover: #B93711;
+  --color-primary-tint: #FCE4DC;     /* soft fill, hover wash */
+  --color-primary-glow: rgba(240, 78, 35, 0.30);
+  --color-primary-fg: #FFFFFF;       /* on primary-strong fills */
+  --color-primary-ink: #171512;      /* poster black — type on a raw heat plate */
+
+  /* ── Cobalt — utility accent: links, secondary buttons, info tags ──── */
+  --color-accent: #2757D6;
+  --color-accent-hover: #1E46B4;
+  --color-accent-tint: #E2E9FB;
+  --color-accent-fg: #FFFFFF;
+
+  /* ── Safety yellow — rationed hype ("LAST UNITS"), always black type ── */
+  --color-gold: #F5C518;
+  --color-gold-hover: #E0B30E;
+  --color-gold-tint: #FDF2CD;
+  --color-gold-glow: rgba(245, 197, 24, 0.30);
+
+  --color-bronze: #F5C518;           /* alias → safety yellow, legacy consumers */
+  --color-bronze-hover: #E0B30E;
+  --color-bronze-tint: #FDF2CD;
+
+  --color-teal: #2FA866;             /* profit / positive delta / in stock */
+  --color-teal-hover: #268A54;
+  --color-teal-tint: #E1F3E9;
+
+  --color-coral: #F04E23;            /* deals → heat */
+  --color-coral-hover: #D13F16;
+  --color-coral-tint: #FCE4DC;
+
+  --color-violet: #2757D6;           /* alias → cobalt */
+  --color-violet-hover: #1E46B4;
+  --color-violet-tint: #E2E9FB;
+
+  --color-secondary: #E9E7E1;
+  --color-price: var(--color-text);
+  --color-cta: var(--color-primary-strong);
+  --color-cta-hover: var(--color-primary-hover);
+  --color-header: #F2F1ED;
+  --color-header-secondary: #171512;  /* the poster-black top strip */
+
+  --color-accent-light: var(--color-accent-tint);
+  --color-accent-2: var(--color-primary);
+  --color-accent-2-hover: var(--color-primary-hover);
+  --color-accent-3: var(--color-teal);
+  --color-accent-4: #75716A;
+
+  /* ── Surfaces — concrete gallery ─────────────────────────────────────
+     bg          light concrete floor
+     bg-secondary warm paper-grey band
+     bg-elevated  gallery white — the card / plinth
+     bg-tertiary  inset well (inputs, table zebra, gauge track) */
+  --color-bg: #F2F1ED;
+  --color-bg-elevated: #FCFBF9;
+  --color-bg-secondary: #E9E7E1;
+  --color-bg-tertiary: #E3E0D8;
+  --color-bg-warm: #E9E7E1;
+  --color-bg-cool: #FCFBF9;
+  --color-bg-poster: #171512;        /* the black contrast band */
+
+  /* ── Ink ─────────────────────────────────────────────────────────────── */
+  --color-text: #171512;             /* poster black — headlines carry the page */
+  --color-text-secondary: #75716A;
+  --color-text-tertiary: #9A958C;
+  --color-text-inverse: #F2F1ED;
+
+  /* ── Lines — warm hairlines, printed-rule crispness ──────────────────── */
+  --color-border: #DCD9D1;
+  --color-border-hover: #C6C2B7;
+  --color-border-strong: #B0AB9E;
+  --color-hairline: rgba(23, 21, 18, 0.08);
+
+  /* ── Status ──────────────────────────────────────────────────────────── */
+  --color-success: #2FA866;          /* profit */
+  --color-success-light: #E1F3E9;
+  --color-warning: #E8A33D;          /* trade lock */
+  --color-warning-light: #FBEEDA;
+  --color-danger: #D9453A;           /* loss / errors */
+  --color-danger-light: #FBE3E1;
+  --color-info: #2757D6;
+
+  /* ── CS2 rarity palette (first-class) ─────────────────────────────────
+     On the light gallery base, rarity reads as a thin vertical spine on the
+     card edge plus a small tag chip — never a glow. The -ink variants are
+     darkened so rarity NAMES stay legible as type on concrete. */
+  --rarity-consumer: #8E9AA8;
+  --rarity-industrial: #4E86C6;
+  --rarity-milspec: #4257D6;
+  --rarity-restricted: #7B3FE4;
+  --rarity-classified: #C21FD1;
+  --rarity-covert: #D6392F;
+  --rarity-gold: #C79A0E;            /* knives / gloves (Extraordinary) */
+  --rarity-contraband: #B8862A;
+
+  /* Raw Valve values — used for the spine strip and tinted render backdrops,
+     where saturation is wanted and contrast is not a type concern. */
+  --rarity-consumer-raw: #b0c3d9;
+  --rarity-industrial-raw: #5e98d9;
+  --rarity-milspec-raw: #4b69ff;
+  --rarity-restricted-raw: #8847ff;
+  --rarity-classified-raw: #d32ce6;
+  --rarity-covert-raw: #eb4b4b;
+  --rarity-gold-raw: #ffd700;
+  --rarity-contraband-raw: #e4ae39;
+
+  /* ── Wear / float gauge (FN → BS) — an authentication-tag instrument ─── */
+  --wear-fn: #2FA866;
+  --wear-mw: #7CB342;
+  --wear-ft: #E8A33D;
+  --wear-ww: #E8762D;
+  --wear-bs: #D9453A;
+  --gradient-wear: linear-gradient(90deg, #2FA866 0%, #7CB342 20%, #E8A33D 45%, #E8762D 72%, #D9453A 100%);
+
+  /* ── Surface treatments — flat by construction ───────────────────────── */
+  --stroke-metal: linear-gradient(135deg, rgba(23,21,18,0.22) 0%, rgba(23,21,18,0.06) 45%, rgba(23,21,18,0.18) 100%);
+  --stroke-gold: linear-gradient(135deg, rgba(245,197,24,0.55) 0%, rgba(245,197,24,0.10) 45%, rgba(245,197,24,0.48) 100%);
+  --stroke-amber: linear-gradient(135deg, rgba(240,78,35,0.55) 0%, rgba(240,78,35,0.10) 45%, rgba(240,78,35,0.48) 100%);
+  --glass-bg: #FCFBF9;               /* no glass in this identity — opaque plate */
+  --glass-bg-strong: #FCFBF9;
+  --glass-border: #DCD9D1;
+  --glass-blur: 0px;
+
+  /* ── Elevation — a printed poster lifting off the wall. Hard, offset,
+       low-alpha; never a soft ambient cloud. ───────────────────────────── */
+  --shadow-sm: 0 1px 0 rgba(23, 21, 18, 0.06);
+  --shadow-md: 0 3px 0 rgba(23, 21, 18, 0.10);
+  --shadow-lg: 0 6px 0 rgba(23, 21, 18, 0.10);
+  --shadow-xl: 0 10px 0 rgba(23, 21, 18, 0.10);
+  --shadow-card: 0 1px 0 rgba(23, 21, 18, 0.06);
+  --shadow-card-hover: 0 6px 0 rgba(23, 21, 18, 0.12);
+  --shadow-accent: 0 3px 0 rgba(39, 87, 214, 0.22);
+  --shadow-warm: 0 3px 0 rgba(240, 78, 35, 0.28);
+  --shadow-glow-amber: 0 3px 0 rgba(240, 78, 35, 0.28);
+  --shadow-glow-azure: 0 3px 0 rgba(39, 87, 214, 0.22);
+  --shadow-glow-violet: 0 3px 0 rgba(39, 87, 214, 0.22);
+  --shadow-glow-gold: 0 3px 0 rgba(245, 197, 24, 0.35);
+
+  /* ── Gradients — used only where the concept needs them: the wear gauge,
+       the rarity backdrop behind a render, and the poster band wash. ───── */
+  --gradient-primary: linear-gradient(135deg, #F04E23 0%, #FF7A4D 100%);
+  --gradient-accent: linear-gradient(135deg, #2757D6 0%, #4E86C6 100%);
+  --gradient-gold: linear-gradient(135deg, #F5C518 0%, #D9A80B 100%);
+  --gradient-metal: linear-gradient(135deg, #FCFBF9 0%, #E3E0D8 100%);
+  --gradient-warm: linear-gradient(180deg, #FCFBF9 0%, #F2F1ED 100%);
+  --gradient-cool: linear-gradient(180deg, #E9E7E1 0%, #F2F1ED 100%);
+  --gradient-hero: none;
+  --gradient-badge: linear-gradient(135deg, #F04E23 0%, #F5C518 100%);
+  --gradient-mint: linear-gradient(135deg, #E1F3E9 0%, #F2F1ED 100%);
+  --gradient-sunset: linear-gradient(135deg, #FCE4DC 0%, #FDF2CD 100%);
+  --gradient-electric: linear-gradient(135deg, #F04E23 0%, #2757D6 100%);
+  --gradient-card-hover: none;
+
+  /* ── Radii — printed-poster crispness. Nothing is round here except the
+       rarity dot and the avatar; the pill token stays for legacy call sites. */
+  --radius-sm: 0.125rem;             /* 2 */
+  --radius-md: 0.1875rem;            /* 3 */
+  --radius-lg: 0.25rem;              /* 4 */
+  --radius-xl: 0.375rem;             /* 6 */
+  --radius-2xl: 0.5rem;              /* 8 */
+  --radius-pill: 9999px;
+
+  /* ── Layout ──────────────────────────────────────────────────────────── */
+  --max-width: 1360px;
+  --header-height: 76px;
+  --announcement-height: 36px;
+
+  /* ── Type — poster display, neutral UI, terminal data ────────────────── */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-anton), "Anton", "Arial Narrow", ui-sans-serif, sans-serif;
+  --font-serif: var(--font-anton), "Anton", ui-sans-serif, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", monospace;
+
+  /* ── Motion — snappy street-retail energy ────────────────────────────── */
+  --ease-out-expo: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --dur-fast: 140ms;
+  --dur-base: 180ms;
+  --dur-slow: 220ms;
+
+  /* ── Promo tints ─────────────────────────────────────────────────────── */
+  --promo-bg-blue: #E2E9FB;
+  --promo-bg-warm: #FCE4DC;
+  --promo-bg-green: #E1F3E9;
+  --promo-bg-purple: #E2E9FB;
+  --promo-bg-pink: #FCE4DC;
+
+  color-scheme: light;
+}
+
+/* ── AFTER HOURS (dark) — first-class opt-in via .dark / [data-theme="dark"] ──
+   The same Drop District identity after the shutters come down: poster-black
+   walls, concrete ink, heat slightly tamed so it does not vibrate, and rarity
+   spines allowed a soft glow because on black they are the only light. */
+[data-theme="dark"],
+.dark {
+  --color-primary: #FF6A3D;
+  --color-primary-strong: #FF6A3D;   /* on black the bright heat already clears AA with black type */
+  --color-primary-hover: #FF8560;
+  --color-primary-tint: rgba(255, 106, 61, 0.16);
+  --color-primary-glow: rgba(255, 106, 61, 0.40);
+  --color-primary-fg: #171512;       /* black type on the bright heat fill */
+  --color-primary-ink: #171512;
+
+  --color-accent: #6E9BFF;
+  --color-accent-hover: #8FB3FF;
+  --color-accent-tint: rgba(110, 155, 255, 0.16);
+  --color-accent-fg: #0E1220;
+
+  --color-gold: #F5C518;
+  --color-gold-hover: #FFD84D;
+  --color-gold-tint: rgba(245, 197, 24, 0.16);
+  --color-gold-glow: rgba(245, 197, 24, 0.40);
+
+  --color-bronze: #F5C518;
+  --color-bronze-hover: #FFD84D;
+  --color-bronze-tint: rgba(245, 197, 24, 0.16);
+
+  --color-teal: #4ECB8B;
+  --color-teal-hover: #6FDBA3;
+  --color-teal-tint: rgba(78, 203, 139, 0.16);
+
+  --color-coral: #FF6A3D;
+  --color-coral-hover: #FF8560;
+  --color-coral-tint: rgba(255, 106, 61, 0.16);
+
+  --color-violet: #6E9BFF;
+  --color-violet-hover: #8FB3FF;
+  --color-violet-tint: rgba(110, 155, 255, 0.16);
+
+  --color-secondary: #201D19;
+  --color-header: #14120F;
+  --color-header-secondary: #0C0B09;
+
+  --color-accent-4: #A29C92;
+
+  --color-bg: #14120F;               /* poster black */
+  --color-bg-elevated: #1E1B17;      /* the lit plinth */
+  --color-bg-secondary: #191713;
+  --color-bg-tertiary: #100E0C;
+  --color-bg-warm: #191713;
+  --color-bg-cool: #1E1B17;
+  --color-bg-poster: #0C0B09;
+
+  --color-text: #F2F1ED;
+  --color-text-secondary: #A29C92;
+  --color-text-tertiary: #6E6960;
+  --color-text-inverse: #14120F;
+
+  --color-border: #2E2A24;
+  --color-border-hover: #3C372F;
+  --color-border-strong: #4C463C;
+  --color-hairline: rgba(242, 241, 237, 0.07);
+
+  --color-success: #4ECB8B;
+  --color-success-light: rgba(78, 203, 139, 0.16);
+  --color-warning: #E8A33D;
+  --color-warning-light: rgba(232, 163, 61, 0.16);
+  --color-danger: #F4685C;
+  --color-danger-light: rgba(244, 104, 92, 0.16);
+  --color-info: #6E9BFF;
+
+  /* Rarity: on black the raw Valve hues are legible as type again. */
+  --rarity-consumer: #b0c3d9;
+  --rarity-industrial: #5e98d9;
+  --rarity-milspec: #6f86ff;
+  --rarity-restricted: #a06cff;
+  --rarity-classified: #e055f0;
+  --rarity-covert: #f4685c;
+  --rarity-gold: #ffd700;
+  --rarity-contraband: #e4ae39;
+
+  --wear-fn: #4ECB8B;
+  --wear-mw: #9ED04A;
+  --wear-ft: #E8A33D;
+  --wear-ww: #F08A4B;
+  --wear-bs: #F4685C;
+  --gradient-wear: linear-gradient(90deg, #4ECB8B 0%, #9ED04A 20%, #E8A33D 45%, #F08A4B 72%, #F4685C 100%);
+
+  --stroke-metal: linear-gradient(135deg, rgba(242,241,237,0.28) 0%, rgba(242,241,237,0.06) 45%, rgba(242,241,237,0.22) 100%);
+  --glass-bg: #1E1B17;
+  --glass-bg-strong: #14120F;
+  --glass-border: #2E2A24;
+
+  --shadow-sm: 0 1px 0 rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 3px 0 rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 6px 0 rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 10px 0 rgba(0, 0, 0, 0.5);
+  --shadow-card: 0 1px 0 rgba(0, 0, 0, 0.45);
+  --shadow-card-hover: 0 6px 0 rgba(0, 0, 0, 0.55);
+  --shadow-warm: 0 3px 0 rgba(255, 106, 61, 0.35);
+
+  --gradient-warm: linear-gradient(180deg, #1E1B17 0%, #14120F 100%);
+  --gradient-cool: linear-gradient(180deg, #191713 0%, #14120F 100%);
+  --gradient-metal: linear-gradient(135deg, #1E1B17 0%, #100E0C 100%);
+
+  --promo-bg-blue: rgba(110, 155, 255, 0.14);
+  --promo-bg-warm: rgba(255, 106, 61, 0.14);
+  --promo-bg-green: rgba(78, 203, 139, 0.14);
+  --promo-bg-purple: rgba(110, 155, 255, 0.14);
+  --promo-bg-pink: rgba(255, 106, 61, 0.14);
+
+  color-scheme: dark;
+}

@@ -1,0 +1,602 @@
+@import "tailwindcss";
+@import "./variables.css";
+@import "./animations.css";
+
+/*
+ * Tailwind v4 — CSS-first config.
+ * Exposes the "Drop District" design tokens defined in variables.css as
+ * Tailwind theme variables so utilities like `bg-primary`, `text-ink`,
+ * `border-line`, `font-display`, `font-mono` all work from a single source of
+ * truth. Nothing in a component should hardcode a colour or a radius.
+ */
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-anton), "Anton", "Arial Narrow", ui-sans-serif, sans-serif;
+  --font-serif: var(--font-anton), "Anton", ui-sans-serif, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+
+  /* Semantic colors — canvas & surfaces (light concrete gallery defaults) */
+  --color-bone: #F2F1ED;
+  --color-paper: #FCFBF9;
+  --color-cream: #E9E7E1;
+  --color-surface: #FCFBF9;
+  --color-poster: #171512;
+
+  /* Ink */
+  --color-ink: #171512;
+  --color-ink-2: #75716A;
+  --color-ink-3: #9A958C;
+
+  /* Heat — the signal accent */
+  --color-primary: #F04E23;
+  --color-primary-strong: #D13F16;
+  --color-primary-hover: #B93711;
+  --color-primary-tint: #FCE4DC;
+  --color-primary-glow: rgba(240, 78, 35, 0.30);
+  --color-primary-fg: #FFFFFF;
+  --color-primary-ink: #171512;
+
+  /* Cobalt — utility accent */
+  --color-accent: #2757D6;
+  --color-accent-hover: #1E46B4;
+  --color-accent-tint: #E2E9FB;
+  --color-accent-fg: #FFFFFF;
+
+  /* Safety yellow — rationed hype */
+  --color-gold: #F5C518;
+  --color-gold-hover: #E0B30E;
+  --color-gold-tint: #FDF2CD;
+
+  /* Bronze slot — aliased to safety yellow */
+  --color-bronze: #F5C518;
+  --color-bronze-hover: #E0B30E;
+  --color-bronze-tint: #FDF2CD;
+
+  /* Profit */
+  --color-teal: #2FA866;
+  --color-teal-hover: #268A54;
+  --color-teal-tint: #E1F3E9;
+
+  /* Deal accent → heat */
+  --color-coral: #F04E23;
+  --color-coral-hover: #D13F16;
+  --color-coral-tint: #FCE4DC;
+
+  /* Violet alias → cobalt */
+  --color-violet: #2757D6;
+  --color-violet-hover: #1E46B4;
+  --color-violet-tint: #E2E9FB;
+
+  /* Lines */
+  --color-line: #DCD9D1;
+  --color-line-strong: #B0AB9E;
+
+  /* Status */
+  --color-success: #2FA866;
+  --color-success-tint: #E1F3E9;
+  --color-warning: #E8A33D;
+  --color-warning-tint: #FBEEDA;
+  --color-danger: #D9453A;
+  --color-danger-tint: #FBE3E1;
+
+  /* CS2 rarity palette */
+  --color-rarity-consumer: #8E9AA8;
+  --color-rarity-industrial: #4E86C6;
+  --color-rarity-milspec: #4257D6;
+  --color-rarity-restricted: #7B3FE4;
+  --color-rarity-classified: #C21FD1;
+  --color-rarity-covert: #D6392F;
+  --color-rarity-gold: #C79A0E;
+  --color-rarity-contraband: #B8862A;
+
+  /* Corners — printed-poster crispness */
+  --radius-sm: 0.125rem;
+  --radius-md: 0.1875rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.375rem;
+  --radius-2xl: 0.5rem;
+
+  /* Container */
+  --container-content: 1360px;
+
+  /* Type scale — poster display */
+  --text-eyebrow: 0.6875rem;
+  --text-eyebrow--line-height: 1.2;
+  --text-eyebrow--letter-spacing: 0.18em;
+
+  --text-display: 4rem;
+  --text-display--line-height: 0.92;
+  --text-display--letter-spacing: -0.01em;
+
+  --text-editorial: 2.5rem;
+  --text-editorial--line-height: 0.96;
+  --text-editorial--letter-spacing: -0.005em;
+}
+
+/* Light is the default identity, so `light:` utilities match the root and the
+   `dark:` variant is the opt-in After Hours theme. Both stay registered so
+   existing classnames keep compiling. */
+@custom-variant light (&:where(:root, :root *, .light, .light *, [data-theme="light"], [data-theme="light"] *));
+@custom-variant dark (&:where(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *));
+
+/* ── Base layer ──────────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: light;
+  /* The sticky header shrinks its utility strip on scroll. Browser scroll
+     anchoring would compensate for that height change by nudging scrollY,
+     which fights the scroll threshold and makes the header jitter. */
+  overflow-anchor: none;
+}
+
+html[data-theme="dark"],
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+::selection {
+  background-color: var(--color-primary);
+  color: var(--color-primary-ink);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-tertiary);
+}
+
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+/* ── Layout helpers ──────────────────────────────────────────────────── */
+
+.section-padding {
+  padding: 3rem 1rem;
+}
+@media (min-width: 768px) {
+  .section-padding { padding: 4rem 1.5rem; }
+}
+@media (min-width: 1024px) {
+  .section-padding { padding: 5rem 2rem; }
+}
+
+.section-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* ── Drop District: the poster voice ─────────────────────────────────── */
+
+/* Poster title — Anton, uppercase, set tight and heavy. Section titles and
+   hero lines only; it is not a body face and never runs long. */
+.poster {
+  font-family: var(--font-display);
+  font-weight: 400;              /* Anton ships one weight and it is already black */
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  line-height: 0.9;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  line-height: 0.92;
+  letter-spacing: 0.005em;
+  color: var(--color-text);
+}
+
+.section-subtitle {
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+  margin-top: 0.625rem;
+  max-width: 56ch;
+  line-height: 1.6;
+}
+
+/* The heat plate behind one word of a headline — the SALE-sticker move.
+   One per headline, never two. */
+.heat-plate {
+  background: var(--color-primary);
+  color: var(--color-primary-ink);
+  padding-inline: 0.12em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* ── Micro-labels & data type ────────────────────────────────────────── */
+
+/* Stencil-style uppercase chip label. */
+.microlabel {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+/* Mono instrument text — floats, prices, seeds, order refs. */
+.readout,
+.spec-value {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* Oversized Swiss/poster index numeral — 01 / 02 / 03 on sections and steps. */
+.index-num {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 0.8;
+  color: var(--color-text-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Stickers — hand-placed labels, slightly rotated ─────────────────── */
+
+.sticker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  padding: 0.3em 0.5em 0.26em;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: var(--color-primary);
+  color: var(--color-primary-ink);
+  transform: rotate(-2deg);
+  transform-origin: center;
+}
+.sticker-yellow {
+  background: var(--color-gold);
+  color: #171512;
+}
+.sticker-black {
+  background: var(--color-text);
+  color: var(--color-text-inverse);
+}
+.sticker-cobalt {
+  background: var(--color-accent);
+  color: var(--color-accent-fg);
+}
+.sticker-right { transform: rotate(2deg); }
+.sticker-flat { transform: none; }
+
+/* ── Tape lines — the divider language. A solid heat or black rule, never
+     an actual tape pattern. ─────────────────────────────────────────── */
+.tape-rule {
+  height: 3px;
+  background: var(--color-primary);
+  border: 0;
+}
+.tape-rule-black {
+  height: 3px;
+  background: var(--color-text);
+  border: 0;
+}
+.hairline {
+  border-color: var(--color-border);
+}
+
+/* ── Surfaces ────────────────────────────────────────────────────────── */
+
+/* The gallery plate: flat white, crisp rule, poster-sharp corner. */
+.plate,
+.panel {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+/* The poster-black band — the loudest brand voice. Pins the token set so a
+   band renders identically in both themes. */
+.poster-band {
+  --color-bg: #171512;
+  --color-bg-elevated: #211E19;
+  --color-bg-secondary: #1B1915;
+  --color-bg-tertiary: #100E0C;
+  --color-text: #F2F1ED;
+  --color-text-secondary: #A29C92;
+  --color-text-tertiary: #6E6960;
+  --color-text-inverse: #171512;
+  --color-border: #322E27;
+  --color-border-strong: #4C463C;
+  --color-primary: #FF6A3D;
+  --color-primary-strong: #FF6A3D;
+  --color-primary-hover: #FF8560;
+  --color-primary-fg: #171512;
+  --color-primary-ink: #171512;
+  --color-primary-tint: rgba(255, 106, 61, 0.16);
+  --color-accent: #6E9BFF;
+  --color-accent-tint: rgba(110, 155, 255, 0.16);
+  --color-gold: #F5C518;
+  --color-success: #4ECB8B;
+  --color-danger: #F4685C;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* Inset well — inputs and search. Focus is a heat ring, never removed. */
+.well {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  transition: border-color 140ms var(--ease-out-expo), box-shadow 140ms var(--ease-out-expo);
+}
+.well:focus-within {
+  border-color: var(--color-text);
+  box-shadow: 0 0 0 3px var(--color-primary-tint);
+}
+
+/* Accessible keyboard focus across interactives. Name kept from the previous
+   identity so no call site has to change. */
+.focus-amber:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-primary);
+}
+
+/* Card lift — a printed poster peeling off the wall: small rise, hard shadow. */
+.card-lift {
+  transition: transform var(--dur-base) var(--ease-out-expo),
+    box-shadow var(--dur-base) var(--ease-out-expo),
+    border-color var(--dur-base) var(--ease-out-expo);
+}
+@media (hover: hover) {
+  .card-lift:hover {
+    transform: translate3d(0, -3px, 0);
+    border-color: var(--color-text);
+    box-shadow: var(--shadow-card-hover);
+  }
+}
+
+/* ── Rarity — spine strip + tag chip, never a glow (except After Hours) ── */
+
+.rarity-spine {
+  background: var(--rarity, var(--rarity-consumer-raw));
+}
+[data-theme="dark"] .rarity-spine,
+.dark .rarity-spine {
+  box-shadow: 0 0 10px 0 color-mix(in srgb, var(--rarity, #b0c3d9) 50%, transparent);
+}
+
+/* Legacy alias — the previous identity's strip class. */
+.rarity-strip {
+  background: var(--rarity, var(--rarity-consumer-raw));
+}
+
+/* A very low-alpha wash of the rarity colour behind a weapon render. */
+.rarity-wash {
+  background: radial-gradient(
+    95% 70% at 50% 62%,
+    color-mix(in srgb, var(--rarity, #b0c3d9) 14%, transparent) 0%,
+    transparent 72%
+  );
+}
+
+/* ── The float tag — the signature component ─────────────────────────── */
+
+/* Printed authentication label: mono readout over a precise wear gauge. */
+.float-gauge {
+  position: relative;
+  height: 6px;
+  background: var(--gradient-wear);
+  border-radius: 1px;
+}
+.wear-bar {
+  background: var(--gradient-wear);
+}
+.wear-slider {
+  background: var(--gradient-wear);
+}
+.wear-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  border: 3px solid var(--color-text);
+  cursor: pointer;
+}
+.wear-slider::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  border: 3px solid var(--color-text);
+  cursor: pointer;
+}
+
+/* ── Concrete texture — a barely-there paper tooth on the base canvas ─── */
+.concrete {
+  background-image: radial-gradient(color-mix(in srgb, var(--color-text) 6%, transparent) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+/* Legacy texture names kept so untouched surfaces stay coherent. */
+.warm-dots,
+.retail-dots,
+.tech-grid {
+  background-image: radial-gradient(color-mix(in srgb, var(--color-text) 6%, transparent) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* Neutralised effects from the previous identity — kept as no-op shims so
+   any surface still referencing them renders flat rather than broken. */
+.grain::before { content: none; }
+.reticle::before,
+.reticle::after { content: none; }
+.glass,
+.glass-strong {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.glass-border { border: 1px solid var(--color-border); }
+.metal-stroke,
+.gold-stroke,
+.amber-stroke {
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-elevated);
+}
+.glow-amber,
+.glow-azure,
+.glow-violet,
+.glow-gold { box-shadow: var(--shadow-card); }
+.gradient-text {
+  color: var(--color-primary-strong);
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+}
+
+
+/* ── Sitewide voice adapters ─────────────────────────────────────────
+   Pages that are not individually art-directed still have to speak in the
+   same voice, so the two utilities they lean on are redefined here rather
+   than left at their framework defaults. */
+
+/* Any surface asking for the display face gets the full poster treatment.
+   Anton ships a single weight, so synthetic bolding is switched off. */
+.font-display,
+.font-serif {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-synthesis-weight: none;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  line-height: 0.95;
+}
+
+/* Nothing in this identity is a pill. `rounded-full` collapses to the
+   system's smallest corner; genuine circles opt back in with an explicit
+   `rounded-[9999px]`. */
+.rounded-full {
+  border-radius: var(--radius-sm);
+}
+
+/* ── Ticker — the recent-pickups marquee ─────────────────────────────── */
+.ticker-track {
+  display: inline-flex;
+  min-width: 200%;
+  animation: marquee 42s linear infinite;
+}
+.ticker:hover .ticker-track,
+.ticker:focus-within .ticker-track {
+  animation-play-state: paused;
+}
+
+/* ── Skeletons — blank release cards, shimmering once ────────────────── */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-bg-tertiary);
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-text) 6%, transparent), transparent);
+  animation: skeleton-shimmer 1.4s infinite;
+}
+@keyframes skeleton-shimmer {
+  100% { transform: translateX(100%); }
+}
+
+/* ── Editorial helpers used across the site ──────────────────────────── */
+.editorial-heading {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  line-height: 0.92;
+}
+
+/* Bento grid — kept for any legacy landing section. */
+.bento {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+.bento > .col-2 { grid-column: span 2; }
+.bento > .row-2 { grid-row: span 2; }
+@media (max-width: 900px) {
+  .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .bento { grid-template-columns: 1fr; }
+  .bento > .col-2 { grid-column: span 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .card-lift:hover { transform: none; }
+  .ticker-track { animation: none; }
+}
