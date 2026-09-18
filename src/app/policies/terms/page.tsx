@@ -1,782 +1,275 @@
 import { PolicyLayout, ContactBlock } from "@/components/layout/PolicyLayout/PolicyLayout";
-import { brand } from "@/lib/brand";
+import { Link } from "@/i18n/routing";
+import { brand, brandAddressLine } from "@/lib/brand";
 
-export const metadata = { title: "Terms and Conditions — Coppedskins" };
+export const metadata = { title: "Terms & Conditions — Coppedskins" };
 
 export default function TermsPage() {
   return (
-    <PolicyLayout title="Terms and Conditions" lastUpdated="9 August 2026">
+    <PolicyLayout title="Terms & Conditions" lastUpdated="17 September 2026">
+      <h2>1. About Coppedskins</h2>
       <p>
-        These Terms and Conditions of Purchase and Use (&ldquo;Terms&rdquo;) govern access to and use of the
-        website available at coppedskins.com, any related user account features, and the services provided
-        through the website (collectively, the &ldquo;Service&rdquo;).
-      </p>
-      <p>The Service is operated by:</p>
-      <ContactBlock />
-      <p>
-        In these Terms, &ldquo;Coppedskins&rdquo;, &ldquo;ULTRASENS&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;
-        and &ldquo;our&rdquo; refer to {brand.company.legalName}. &ldquo;User&rdquo;, &ldquo;you&rdquo; and
-        &ldquo;your&rdquo; refer to the individual accessing or using the Service.
+        Coppedskins is operated by <strong>{brand.company.legalName}</strong>, company number{" "}
+        <strong>{brand.company.number}</strong>, of <strong>{brandAddressLine}</strong>. Our website is{" "}
+        <strong>{brand.domain.replace(/^www\./, "")}</strong>. You can contact us at{" "}
+        <strong>{brand.contact.email}</strong>.
       </p>
       <p>
-        Please read these Terms carefully before using the Service or placing an order. By creating or using an
-        account, placing an order, or otherwise using the Service, you confirm that you have read and accepted
-        these Terms.
-      </p>
-
-      <h2>1. Definitions</h2>
-      <p>For the purposes of these Terms:</p>
-      <ul>
-        <li><strong>Account</strong> means the Coppedskins user account connected to your Steam Account.</li>
-        <li>
-          <strong>Digital Item</strong> or <strong>Item</strong> means a Counter-Strike 2 virtual item, commonly
-          referred to as a skin, which can be represented and transferred within the Steam environment.
-        </li>
-        <li>
-          <strong>Fulfilment Provider</strong> means a confidential third-party supplier, inventory provider, bot
-          operator, or current holder of a Digital Item that assists ULTRASENS in completing delivery.
-        </li>
-        <li><strong>Order</strong> means a request submitted through the Service to purchase one or more Digital Items.</li>
-        <li><strong>Order Confirmation</strong> means our electronic confirmation that an Order has been accepted.</li>
-        <li><strong>Steam</strong> means the digital service operated by Valve Corporation or its relevant affiliates.</li>
-        <li><strong>Steam Account</strong> means the Steam account connected to your Coppedskins Account.</li>
-        <li><strong>Trade Offer</strong> means a Steam trade offer used to transfer a Digital Item to your Steam Account.</li>
-        <li>
-          <strong>Trade URL</strong> means the Steam URL that allows another Steam account to send Trade Offers to
-          you.
-        </li>
-      </ul>
-
-      <h2>2. Scope of the Service</h2>
-      <p>Coppedskins allows eligible users to browse and purchase Digital Items displayed through the Service.</p>
-      <p>
-        Users may purchase Digital Items only. Coppedskins does not provide users with functionality to list
-        Digital Items for sale, sell Items to ULTRASENS, withdraw funds, or maintain a cash balance through the
-        Service.
-      </p>
-      <p>For each Order accepted by us:</p>
-      <ul>
-        <li>ULTRASENS is the contractual seller responsible to you for the Order;</li>
-        <li>payment is collected for ULTRASENS;</li>
-        <li>the invoice or other applicable transaction document is issued by ULTRASENS; and</li>
-        <li>delivery may be performed by a Fulfilment Provider on our behalf.</li>
-      </ul>
-      <p>
-        Depending on where the selected Digital Item is held, delivery may be completed through a bot operated by
-        a Fulfilment Provider or through a direct transfer from the Steam Account currently holding the Item.
+        In these Terms, &ldquo;Coppedskins&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo; and &ldquo;our&rdquo; mean{" "}
+        {brand.company.legalName}. &ldquo;You&rdquo; means the person using the website or purchasing a product.
       </p>
       <p>
-        The identity and commercial arrangements of our Fulfilment Providers are confidential and may not be
-        disclosed unless disclosure is required by applicable law, necessary to protect your legal rights, or
-        necessary to complete or investigate a particular transaction.
-      </p>
-      <p>
-        Our use of a Fulfilment Provider does not remove ULTRASENS&rsquo;s responsibility to you for properly
-        performing an accepted Order.
+        We sell Counter-Strike 2 digital in-game items, commonly called skins, in our own name. Your purchase
+        contract is with {brand.company.legalName}. We remain responsible for our obligations as seller even where
+        fulfilment involves technical service providers.
       </p>
 
-      <h2>3. Eligibility</h2>
-      <p>You may use the Service only if:</p>
-      <ul>
-        <li>you are at least 18 years old;</li>
-        <li>you have the legal capacity to enter into a binding contract;</li>
-        <li>you have a valid Steam Account that you are authorised to use;</li>
-        <li>your Steam Account is eligible to receive the relevant Digital Item;</li>
-        <li>
-          you are not located in, ordinarily resident in, or accessing the Service from a Restricted Jurisdiction
-          identified in Section 16;
-        </li>
-        <li>your use of the Service is lawful in your country or territory; and</li>
-        <li>you comply with these Terms and applicable Steam rules.</li>
-      </ul>
-      <p>By using the Service, you represent that all eligibility requirements are satisfied.</p>
+      <h2>2. Scope and related policies</h2>
       <p>
-        We do not knowingly permit individuals under 18 years of age to create an Account or purchase Digital
-        Items. We may suspend an Account or cancel an Order if we reasonably believe that the age requirement has
-        not been met.
+        These Terms govern your use of Coppedskins and purchases made through it. Please read them together with our{" "}
+        <Link href="/policies/payment">Payment &amp; Pricing Policy</Link>,{" "}
+        <Link href="/policies/shipping">Digital Item Delivery Policy</Link> and{" "}
+        <Link href="/policies/returns">Refund &amp; Cancellation Policy</Link>, which form part of the purchase
+        terms.
+      </p>
+      <p>
+        Our <Link href="/policies/privacy">Privacy Policy</Link> and{" "}
+        <Link href="/policies/cookies">Cookie Policy</Link> explain how information is handled. Accepting these
+        Terms does not constitute consent to every processing activity described in those notices.
+      </p>
+      <p>
+        Specific product information and conditions clearly disclosed and agreed before purchase apply to that
+        order. Nothing in these documents excludes mandatory consumer rights. If a provision conflicts with those
+        rights, the mandatory protection takes priority.
       </p>
 
-      <h2>4. Steam Login and Account Registration</h2>
-      <p>A Steam Account is required to create an Account and purchase Digital Items.</p>
+      <h2>3. Eligibility and location restrictions</h2>
       <p>
-        Authentication is performed using Steam Login. Coppedskins does not ask for or receive your Steam
-        password through the Steam Login process. You must never provide your Steam password, Steam Guard code,
-        authentication code, API key, recovery code, or other security credentials to anyone claiming to
-        represent Coppedskins.
-      </p>
-      <p>Your Account is personal to you. You must not:</p>
-      <ul>
-        <li>create an Account using another person&rsquo;s Steam Account;</li>
-        <li>allow another person to use your Account;</li>
-        <li>transfer or sell your Account;</li>
-        <li>connect a Trade URL belonging to a different Steam Account;</li>
-        <li>create multiple Accounts to circumvent restrictions, limits or enforcement measures; or</li>
-        <li>access an Account without the account holder&rsquo;s permission.</li>
-      </ul>
-      <p>
-        You are responsible for maintaining the security of your Steam Account, email account, devices and
-        sessions. You must promptly contact us if you suspect unauthorised access to your Account or an Order that
-        you did not place.
+        You must be at least 18 years old, legally able to enter into a contract and authorised to use the payment
+        method and Steam account supplied for the order.
       </p>
       <p>
-        We may require you to confirm account details or provide information reasonably necessary to prevent
-        fraud, verify eligibility, comply with applicable law, or resolve a transaction problem.
+        We do not accept orders from customers located in or ordinarily resident in the following countries:
+      </p>
+      <p>
+        Afghanistan; Belarus; Central African Republic; Cuba; Democratic Republic of the Congo; Haiti; Iran; Iraq;
+        Mali; Myanmar (Burma); North Korea; Russia; Somalia; South Sudan; Sudan; Syria; Venezuela; Yemen;
+        Zimbabwe.
+      </p>
+      <p>
+        These are our service availability restrictions. Availability elsewhere remains subject to applicable law,
+        payment availability and the ability to deliver the item. We may also refuse a transaction involving a
+        person or entity subject to applicable sanctions or another legal prohibition.
+      </p>
+      <p>
+        You must provide accurate location and billing information and must not conceal your location or use
+        another person&rsquo;s details to bypass a restriction. We may request information reasonably necessary to
+        establish eligibility. A refusal or cancellation does not automatically entitle us to retain payment for an
+        undelivered item.
       </p>
 
-      <h2>5. Nature of Digital Items</h2>
+      <h2>4. Your account and security</h2>
       <p>
-        Digital Items exist within and depend on Steam. They are not physical goods and are not delivered outside
-        the Steam environment.
+        Keep your account information accurate and your login credentials secure. Notify us promptly if you suspect
+        unauthorised access or an order you did not place.
       </p>
       <p>
-        A purchase through Coppedskins gives you the contractual right to receive the selected Digital Item in
-        the connected Steam Account, subject to these Terms, applicable law, and the rules and technical
-        functionality of Steam.
+        You are responsible for the accuracy of the Steam account and trade details you provide and for maintaining
+        the account&rsquo;s ability to receive the purchased item. We will not ask you to send your Steam password,
+        authentication codes or card security code by email.
       </p>
       <p>
-        Digital Items may constitute limited digital licence rights rather than property owned in the same manner
-        as physical goods. Your ability to possess, display, use, modify or transfer an Item remains subject to
-        Steam&rsquo;s terms, technical rules, account restrictions and continued operation.
-      </p>
-      <p>Coppedskins does not control Steam and cannot guarantee that:</p>
-      <ul>
-        <li>Steam will remain continuously available;</li>
-        <li>Steam will continue supporting a particular Digital Item or transfer mechanism;</li>
-        <li>Valve will not change its rules, restrictions or technical systems;</li>
-        <li>a Digital Item will remain transferable;</li>
-        <li>a Digital Item will retain any particular price, rarity or level of demand; or</li>
-        <li>your Steam Account will remain eligible to hold or use the Item.</li>
-      </ul>
-      <p>
-        Digital Items are cosmetic digital content. They do not provide guaranteed gameplay advantages and must
-        not be treated as regulated financial products, deposits, savings instruments or guaranteed investments.
+        You must not impersonate another person, access someone else&rsquo;s account, exploit website errors or use
+        the service for fraud, unlawful transactions, harassment, malicious software or interference with our
+        systems. Automated activity that bypasses access controls or materially disrupts the service is prohibited.
       </p>
 
-      <h2>6. No Affiliation With Valve</h2>
-      <p>Coppedskins is an independent service.</p>
+      <h2>5. What you are buying</h2>
       <p>
-        Unless expressly stated otherwise, ULTRASENS is not affiliated with, sponsored by, endorsed by, or acting
-        on behalf of Valve Corporation, Steam, Counter-Strike 2, or any of their affiliates.
+        Products are digital in-game items for use within the relevant game and platform. They are not physical
+        goods, activation keys, securities or an entitlement to income. Purchasing an item does not transfer
+        ownership of the game, its software or underlying intellectual property.
       </p>
       <p>
-        All third-party names, game titles, trademarks, images and related materials belong to their respective
-        owners. Their use through the Service is for identification and informational purposes.
-      </p>
-
-      <h2>7. Item Information</h2>
-      <p>We aim to display accurate information about each Digital Item. Depending on the Item, this may include:</p>
-      <ul>
-        <li>item name and type;</li>
-        <li>exterior or wear condition;</li>
-        <li>float value;</li>
-        <li>pattern or paint seed;</li>
-        <li>StatTrak status;</li>
-        <li>stickers, charms or other applied elements;</li>
-        <li>trade restriction status;</li>
-        <li>screenshots or rendered images; and</li>
-        <li>price and currency.</li>
-      </ul>
-      <p>
-        You must review the Item description and relevant characteristics before placing an Order. Characteristics
-        such as float value, pattern, sticker placement and wear can materially affect an Item&rsquo;s appearance
-        and perceived value.
+        An item&rsquo;s use and transferability are subject to the game and platform rules. Before purchasing,
+        review the item name, exterior, StatTrak or Souvenir status and any other characteristics expressly
+        included in the listing. Where a listing specifies float, pattern, stickers or another individual
+        attribute, those stated attributes form part of the product description.
       </p>
       <p>
-        Images may be rendered or displayed differently depending on screen settings, browser, Steam updates or
-        technical limitations. Where the listing identifies a specific Item, the recorded item attributes take
-        precedence over minor visual differences in a preview image.
-      </p>
-      <p>We will not replace the selected Item with another materially different Item without your express agreement.</p>
-
-      <h2>8. Availability and Pricing</h2>
-      <p>
-        Digital Item availability is obtained through technical integrations and may change rapidly. Placing an
-        Item in a cart does not necessarily reserve it.
+        Images may be illustrative where clearly identified as such. Display settings and game rendering can affect
+        appearance, but this does not excuse supplying a materially different item from the one described.
       </p>
       <p>
-        All displayed prices include VAT where applicable. Before payment, the checkout will show the total amount
-        payable in the selected currency.
-      </p>
-      <p>Purchases may be completed in:</p>
-      <ul>
-        <li>euros (EUR);</li>
-        <li>United States dollars (USD); or</li>
-        <li>pounds sterling (GBP).</li>
-      </ul>
-      <p>
-        You are responsible for selecting the preferred currency before confirming payment. Your card issuer may
-        apply currency conversion charges, cross-border charges or other fees that are not imposed or controlled
-        by ULTRASENS.
-      </p>
-      <p>
-        Digital Item prices may change due to availability, demand, market conditions, item characteristics,
-        currency changes or updated supplier information. A price change will not affect an Order after we have
-        issued an Order Confirmation, except in the case of an obvious pricing or technical error that a
-        reasonable person should have recognised.
-      </p>
-      <p>
-        If an Item becomes unavailable, is incorrectly described, or is affected by an obvious pricing or
-        technical error before the Order is accepted, we may reject the Order.
-      </p>
-      <p>If such an issue is discovered after payment, we will contact you and either:</p>
-      <ul>
-        <li>offer to fulfil the Order on corrected terms, subject to your express agreement; or</li>
-        <li>cancel the affected Order and initiate a full refund.</li>
-      </ul>
-
-      <h2>9. Order Process and Contract Formation</h2>
-      <p>To place an Order, you must:</p>
-      <ul>
-        <li>sign in using your Steam Account;</li>
-        <li>provide a valid Trade URL linked to the same Steam Account;</li>
-        <li>select the Digital Item;</li>
-        <li>review the Item details, total price, currency and delivery information;</li>
-        <li>provide any required consents or acknowledgements;</li>
-        <li>accept these Terms and the applicable policies; and</li>
-        <li>submit payment.</li>
-      </ul>
-      <p>Your submission of an Order is an offer to purchase the selected Digital Item from ULTRASENS.</p>
-      <p>
-        An automated acknowledgement that we have received your Order does not necessarily mean that the Order has
-        been accepted. The purchase contract is formed when we issue an Order Confirmation following successful
-        payment authorisation.
-      </p>
-      <p>We may decline or cancel an Order before delivery where reasonably necessary because of:</p>
-      <ul>
-        <li>Item unavailability;</li>
-        <li>payment failure or reversal;</li>
-        <li>an obvious pricing or description error;</li>
-        <li>suspected fraud or unauthorised payment;</li>
-        <li>Steam restrictions;</li>
-        <li>a technical integration error;</li>
-        <li>violation of these Terms;</li>
-        <li>legal, sanctions or geographic restrictions; or</li>
-        <li>circumstances outside our reasonable control that prevent delivery.</li>
-      </ul>
-      <p>
-        If we cancel an accepted and paid Order for a reason not caused by you, we will initiate a full refund to
-        the original payment method.
+        We do not promise that an item will retain its value, increase in price, remain resalable at a particular
+        price or remain supported indefinitely by the game platform. These statements do not limit our
+        responsibility for the product description or any binding promise made for your order.
       </p>
 
-      <h2>10. Payments and Invoices</h2>
+      <h2>6. Orders and contract formation</h2>
       <p>
-        Each Order is paid through a separate card transaction. Coppedskins does not provide a stored-value
-        balance or permit cash withdrawals.
-      </p>
-      <p>Supported card networks are:</p>
-      <ul>
-        <li>Visa; and</li>
-        <li>Mastercard.</li>
-      </ul>
-      <p>
-        Payments are processed with the assistance of authorised third-party payment service providers. We are not
-        required to identify a particular provider in these Terms and may change providers without amending these
-        Terms, provided that the change does not reduce your statutory rights.
+        Check your selected item, receiving Steam account, price and currency before paying. Submitting an order is
+        your offer to buy the item under the terms displayed at checkout.
       </p>
       <p>
-        Unless expressly stated otherwise during checkout, complete card numbers and card security codes are
-        submitted directly to the payment processing environment and are not stored by ULTRASENS.
-      </p>
-      <p>By submitting a payment, you represent that:</p>
-      <ul>
-        <li>you are authorised to use the selected card;</li>
-        <li>the billing and payment information is accurate;</li>
-        <li>the payment is not connected to fraud or other unlawful activity; and</li>
-        <li>the card issuer is authorised to complete the transaction.</li>
-      </ul>
-      <p>
-        Payment may be subject to authorisation, security screening, fraud prevention controls, card issuer
-        approval or additional authentication. A payment may be declined or delayed by the payment provider or
-        card issuer.
+        We accept your order when we issue an <strong>Order Confirmation</strong> expressly confirming acceptance.
+        An automated receipt acknowledging a payment or an order request is not acceptance unless it also confirms
+        that we have accepted the order. We will provide the confirmation by email so that you can retain it.
       </p>
       <p>
-        An electronic invoice or other applicable transaction document will be issued by ULTRASENS and may be made
-        available through your Account or sent electronically.
+        We may decline an order before acceptance if payment fails, the item is unavailable, delivery cannot
+        lawfully be completed or there is a genuine security concern. If money has been collected for an order we do
+        not accept, we will return it, subject only to a legal restriction that prevents repayment.
+      </p>
+      <p>
+        After acceptance, we may cancel where fulfilment becomes impossible or unlawful, or where a genuine and
+        obvious pricing error requires correction. We will explain the reason where we can lawfully do so. We will
+        not charge a higher price or substitute a materially different item without your agreement. Your rights
+        concerning cancellation and repayment are set out in the Refund &amp; Cancellation Policy.
       </p>
 
-      <h2>11. Delivery</h2>
-      <p>Digital Items are delivered through Steam.</p>
+      <h2>7. Prices and payment</h2>
       <p>
-        Following successful payment, a Trade Offer is normally generated or sent within a few minutes. Unless a
-        different delivery period is clearly disclosed before payment, we aim to complete delivery within 24 hours
-        after issuing the Order Confirmation.
-      </p>
-      <p>Delivery times are estimates rather than guarantees where a delay results from:</p>
-      <ul>
-        <li>Steam downtime or technical problems;</li>
-        <li>a Steam trade restriction, protection period or security hold;</li>
-        <li>an invalid, expired or mismatched Trade URL;</li>
-        <li>a private Steam profile or inventory where public access is technically required;</li>
-        <li>an inventory capacity limitation;</li>
-        <li>a VAC, community or trade restriction;</li>
-        <li>a recent password, device, Steam Guard or account change;</li>
-        <li>a security or fraud review;</li>
-        <li>failure to accept the Trade Offer;</li>
-        <li>action or inaction by the user; or</li>
-        <li>another circumstance outside our reasonable control.</li>
-      </ul>
-      <p>Delivery may be performed:</p>
-      <ul>
-        <li>by a bot operated by a Fulfilment Provider; or</li>
-        <li>directly from the Steam Account currently holding the selected Item.</li>
-      </ul>
-      <p>
-        The Steam Account sending the Item may therefore have a name or profile that does not contain the
-        Coppedskins brand.
+        We accept Visa and Mastercard payments in EUR, GBP and USD. The selected transaction currency and total
+        payable are shown before you commit to pay. Prices can change before an order is placed; a later market
+        price movement does not itself change an accepted order.
       </p>
       <p>
-        You must carefully check every Trade Offer before accepting it. The offer must contain the Item purchased
-        through Coppedskins and must not require you to transfer money, another Digital Item, login credentials
-        or authentication information through Steam.
+        Payment is for the individual order. Coppedskins does not provide a stored-value wallet, customer deposits
+        or cash withdrawal facilities.
       </p>
       <p>
-        If a Trade Offer contains an incorrect Item or requests anything from you in return, do not accept it and
-        contact us immediately.
+        {brand.company.legalName} is not VAT registered. We do not issue VAT invoices representing that we have
+        charged UK VAT. The final amount payable, including any applicable taxes and mandatory charges, will be
+        disclosed before payment. Your card issuer may separately charge for currency conversion or international
+        transactions.
       </p>
 
-      <h2>12. User Delivery Responsibilities</h2>
-      <p>To receive an Item, you must:</p>
-      <ul>
-        <li>remain signed in to the correct Steam Account;</li>
-        <li>provide a valid Trade URL linked to that Account;</li>
-        <li>ensure that the Account is eligible to trade;</li>
-        <li>configure profile and inventory visibility as reasonably required for delivery;</li>
-        <li>maintain sufficient inventory capacity;</li>
-        <li>review and accept the correct Trade Offer within the displayed validity period; and</li>
-        <li>comply with Steam Guard and other Steam security requirements.</li>
-      </ul>
+      <h2>8. Delivery and immediate supply</h2>
       <p>
-        Trade Offers may expire after the period shown in the Service or through Steam. If an offer expires, we may
-        attempt to issue another offer.
+        Items are delivered through a Steam trade to the receiving account specified for the order. Payment
+        confirmation, creation of a trade offer or a website status alone does not prove that the item has reached
+        your Steam inventory.
       </p>
       <p>
-        Repeated failure to accept a valid Trade Offer may delay delivery. If your action or inaction prevents
-        delivery, we may ask you to correct the problem within a reasonable period.
+        Delivery is completed when the correct item is transferred to the agreed Steam account and the transfer is
+        confirmed by the platform&rsquo;s records, subject to investigation of any error or subsequent reversal.
       </p>
       <p>
-        If delivery remains impossible because of your failure to meet these requirements, we may cancel the
-        Order. Any refund will be handled in accordance with the Refund, Cancellation and Withdrawal Policy and
-        applicable law.
+        Where you request immediate supply, we may begin supplying the digital content before any statutory
+        cancellation period ends. The checkout will ask for your express consent and acknowledgement of the effect
+        on your cancellation right. Your payment alone does not constitute that consent.
+      </p>
+      <p>
+        The Digital Item Delivery Policy explains receiving-account requirements, trade acceptance, delivery delays
+        and platform restrictions.
       </p>
 
-      <h2>13. Completion of Delivery</h2>
+      <h2>9. Cancellations, returns and consumer remedies</h2>
       <p>
-        Delivery is completed when Steam records the transfer of the purchased Item to the Steam Account connected
-        to your Coppedskins Account.
+        We do not offer a voluntary change-of-mind return after correct delivery. A change in market price,
+        preference or intended use does not by itself create a refund entitlement.
       </p>
       <p>
-        You must promptly review the completed transfer. If you believe that the delivered Item does not match the
-        Order Confirmation, contact us without undue delay and provide the Order number, SteamID, Trade Offer
-        details and supporting screenshots or records.
-      </p>
-      <p>
-        A Steam-imposed trade protection period, cooldown, security restriction or temporary inability to
-        re-transfer, modify or consume the Item does not mean that delivery has not occurred, provided that the
-        correct Item has been transferred to your Steam Account.
+        This does not remove any cancellation right that has not lawfully ended, or your remedies for an item that
+        was not delivered, does not match the contract or was supplied without the necessary right to supply it. See
+        the Refund &amp; Cancellation Policy for the applicable process, including the statutory cancellation form.
       </p>
 
-      <h2>14. Steam Trade Reversals</h2>
+      <h2>10. Platform restrictions and reversals</h2>
       <p>
-        Steam may permit certain completed trades to be reversed during a protection period determined by Steam.
-      </p>
-      <p>You must not reverse or attempt to reverse a completed trade for fraudulent, abusive or unauthorised purposes.</p>
-      <p>
-        If you believe a trade should be reversed because of an incorrect Item, unauthorised transaction or other
-        legitimate issue, contact Coppedskins before taking action where reasonably possible.
-      </p>
-      <p>An improper reversal may result in:</p>
-      <ul>
-        <li>suspension or termination of your Account;</li>
-        <li>cancellation of pending Orders;</li>
-        <li>refusal of future transactions;</li>
-        <li>recovery of the Item or its value;</li>
-        <li>recovery of reasonably incurred losses; and</li>
-        <li>referral to the payment provider, Steam or competent authorities where appropriate.</li>
-      </ul>
-      <p>Nothing in this Section prevents you from exercising a mandatory legal right or reporting genuine fraud.</p>
-
-      <h2>15. Cancellation, Refunds and Withdrawal Rights</h2>
-      <p>
-        Refunds, cancellations and statutory withdrawal rights are governed by the Refund, Cancellation and
-        Withdrawal Policy, which forms part of these Terms.
-      </p>
-      <p>In summary:</p>
-      <ul>
-        <li>if we cannot supply the purchased Item, we will cancel the affected Order and initiate a full refund;</li>
-        <li>if payment was taken more than once for the same Order, the duplicate amount will be refunded;</li>
-        <li>
-          if the delivered Item does not conform to the Order, you may be entitled to correction, replacement, a
-          price reduction, cancellation or another remedy under applicable law;
-        </li>
-        <li>refunds are normally made to the original payment method;</li>
-        <li>bank or card processing times may apply after a refund has been initiated; and</li>
-        <li>
-          a change of mind does not automatically create a right to a refund after a correctly delivered Digital
-          Item has been accepted.
-        </li>
-      </ul>
-      <p>
-        Where applicable consumer law provides a right to withdraw from a contract for digital content or an
-        immediately performed digital service, we may ask you at checkout to:
-      </p>
-      <ul>
-        <li>expressly request or consent to performance beginning during the withdrawal period; and</li>
-        <li>
-          acknowledge that you will lose the right to withdraw once performance begins or is completed, to the
-          extent permitted by law.
-        </li>
-      </ul>
-      <p>
-        Acceptance of these Terms alone does not constitute a waiver of a statutory withdrawal right. Your rights
-        will be affected only where all legally required information, consent and acknowledgements have been
-        properly provided.
-      </p>
-      <p>Nothing in these Terms excludes rights that cannot lawfully be excluded.</p>
-
-      <h2>16. Restricted Jurisdictions</h2>
-      <p>
-        The Service is not available to persons located in, ordinarily resident in, or accessing the Service from:
-      </p>
-      <ul>
-        <li>Afghanistan;</li>
-        <li>Belarus;</li>
-        <li>Central African Republic;</li>
-        <li>Cuba;</li>
-        <li>Democratic Republic of the Congo;</li>
-        <li>Haiti;</li>
-        <li>Iran;</li>
-        <li>Iraq;</li>
-        <li>Mali;</li>
-        <li>Myanmar (Burma);</li>
-        <li>North Korea;</li>
-        <li>Russia;</li>
-        <li>Somalia;</li>
-        <li>South Sudan;</li>
-        <li>Sudan;</li>
-        <li>Syria;</li>
-        <li>Venezuela;</li>
-        <li>Yemen; or</li>
-        <li>Zimbabwe.</li>
-      </ul>
-      <p>
-        These territories are restricted for legal, compliance, risk management or business reasons. Their
-        inclusion does not necessarily mean that every listed territory is subject to the same legal restrictions.
+        Steam may impose security holds, trade protection, transfer restrictions or account limitations. A
+        disclosed restriction is not in itself a defect, but we remain responsible for describing the item and
+        delivery arrangements accurately.
       </p>
       <p>
-        You must not use a VPN, proxy, false address, third-party payment instrument or other method to conceal or
-        misrepresent your location or residence.
+        If a trade is reversed, we will investigate the item and payment records and agree the appropriate next step
+        or provide a remedy required by law. Do not assume that a platform reversal automatically cancels your
+        purchase contract or that accepting an item removes all statutory rights.
       </p>
       <p>
-        We may also restrict a transaction where it involves a person, entity, wallet, card, bank, account or
-        activity subject to applicable sanctions or other legal restrictions.
+        You must not use reversals or false payment disputes to obtain both the item and its price. This does not
+        restrict legitimate security recovery, complaints, cardholder rights or legal remedies.
       </p>
 
-      <h2>17. Acceptable Use</h2>
-      <p>You must use the Service lawfully and in good faith.</p>
-      <p>You must not:</p>
-      <ul>
-        <li>use stolen, fraudulent or unauthorised payment details;</li>
-        <li>impersonate another person or misrepresent your identity, age or location;</li>
-        <li>access another person&rsquo;s Account or Steam Account;</li>
-        <li>use the Service for money laundering, terrorist financing, sanctions evasion or other unlawful activity;</li>
-        <li>initiate a purchase without intending to complete it;</li>
-        <li>abuse refunds, payment disputes or chargeback procedures;</li>
-        <li>manipulate prices, availability, orders or technical integrations;</li>
-        <li>interfere with a Trade Offer or delivery;</li>
-        <li>use scripts, bots, crawlers or automated purchasing systems without written permission;</li>
-        <li>scrape, copy, extract or commercially reuse Service data;</li>
-        <li>probe, test or circumvent security controls;</li>
-        <li>introduce malware, malicious code or harmful content;</li>
-        <li>overload or disrupt the Service;</li>
-        <li>conceal access from a Restricted Jurisdiction;</li>
-        <li>use the Service in violation of Steam rules;</li>
-        <li>infringe intellectual property, privacy or other third-party rights; or</li>
-        <li>assist another person in any prohibited activity.</li>
-      </ul>
+      <h2>11. Website content and third-party rights</h2>
       <p>
-        You remain entitled to raise a genuine payment dispute or consumer complaint. However, you should contact
-        us first where reasonably possible so that we can investigate and attempt to resolve the issue.
+        Our website content, branding and layout are protected by intellectual property rights. You may use the
+        website and retain copies of your purchase documents for legitimate personal purposes. You may not
+        reproduce or commercially exploit protected content without permission or another lawful basis.
+      </p>
+      <p>
+        Third-party names, item names, images and trademarks belong to their respective rights holders. Coppedskins
+        is not affiliated with or endorsed by Valve Corporation. Steam and Counter-Strike are trademarks of their
+        respective owner.
       </p>
 
-      <h2>18. Security and Compliance Reviews</h2>
-      <p>We may review an Account, Order or payment where reasonably necessary to:</p>
-      <ul>
-        <li>prevent fraud or account misuse;</li>
-        <li>confirm payment authorisation;</li>
-        <li>verify age, location or eligibility;</li>
-        <li>investigate a disputed transaction;</li>
-        <li>protect users, ULTRASENS or third parties;</li>
-        <li>enforce these Terms; or</li>
-        <li>comply with applicable law or a lawful authority request.</li>
-      </ul>
+      <h2>12. Availability and changes</h2>
       <p>
-        We may request additional information where proportionate and permitted by law. We will not claim that a
-        particular identity verification or compliance process applies unless it is actually implemented for the
-        relevant transaction.
+        We may maintain, update or temporarily suspend parts of the website. If an interruption affects a paid
+        order, we will address delivery or repayment under the applicable purchase terms.
       </p>
       <p>
-        An Order may be delayed, declined or cancelled if requested information is not provided or if we cannot
-        reasonably resolve a material security or compliance concern.
+        We may update these Terms for future use and future purchases. The version agreed for an accepted order
+        continues to govern that order unless a change is required by law or separately agreed with you. We will not
+        retrospectively remove an accrued refund or consumer right by updating a policy.
       </p>
 
-      <h2>19. Suspension and Termination</h2>
-      <p>We may temporarily restrict, suspend or terminate access to the Service where we reasonably believe that:</p>
-      <ul>
-        <li>you have materially or repeatedly violated these Terms;</li>
-        <li>the Account is being used without authorisation;</li>
-        <li>your activity presents a fraud, security or legal risk;</li>
-        <li>you are accessing from a Restricted Jurisdiction;</li>
-        <li>a payment has been reversed or disputed;</li>
-        <li>suspension is required by Steam, a payment provider or a competent authority; or</li>
-        <li>restriction is reasonably necessary to protect the Service or another person.</li>
-      </ul>
+      <h2>13. Suspension and account closure</h2>
       <p>
-        Where appropriate, we will inform you of the reason for the restriction and provide an opportunity to
-        contact support. We may withhold specific security or fraud-detection details where disclosure would
-        create a risk or violate applicable law.
+        We may restrict access where reasonably necessary to investigate fraud, protect accounts, address a
+        material breach or comply with law. Where appropriate and lawful, we will explain the restriction and allow
+        you to clarify or remedy the issue.
       </p>
       <p>
-        If an Account is terminated, unfulfilled paid Orders will be cancelled and refunded unless payment is
-        subject to a legitimate dispute, reversal, legal hold or another lawful restriction.
-      </p>
-      <p>
-        You may request closure of your Account by contacting us. Account closure does not require us to delete
-        information that must be retained for accounting, fraud prevention, dispute resolution or legal
-        compliance.
+        Account suspension or closure does not automatically cancel a valid claim or allow us to keep money for an
+        undelivered order. You may request account closure at {brand.contact.email}. Closing an account does not
+        erase records that must be retained for a lawful purpose or settle outstanding orders and disputes by
+        itself.
       </p>
 
-      <h2>20. Third-Party Services</h2>
+      <h2>14. Our responsibility</h2>
       <p>
-        The Service depends on third-party systems, including Steam, payment processing services, hosting
-        infrastructure and Fulfilment Providers.
+        We are responsible for losses you suffer that are a foreseeable result of our breach of contract or failure
+        to use reasonable care and skill. We do not exclude liability for fraud, fraudulent misrepresentation,
+        death or personal injury caused by negligence, or any liability that cannot lawfully be excluded.
       </p>
       <p>
-        Your use of Steam remains governed by Steam&rsquo;s own terms and privacy documentation. Coppedskins
-        does not control Steam account suspensions, trade restrictions, security holds, technical downtime or
-        changes to Steam functionality.
+        For consumer purchases, we do not impose a blanket limit that removes statutory remedies or caps all claims
+        at the price of an item. We are not responsible for losses caused solely by your unauthorised modification,
+        onward transfer, account compromise unrelated to our conduct or breach of platform rules, except to the
+        extent that our own breach or the law makes us responsible.
       </p>
       <p>
-        We are not responsible for a third party&rsquo;s independent acts or systems where they are genuinely
-        outside our reasonable control. However, this does not remove ULTRASENS&rsquo;s obligations concerning an
-        accepted Order, including the obligation to provide an appropriate remedy where delivery cannot be
-        completed.
+        The store is intended for personal consumer purchases. We do not undertake to compensate speculative
+        trading profits, business interruption or commercial resale losses. This does not exclude a loss for which
+        liability cannot lawfully be restricted.
       </p>
       <p>
-        Links to third-party websites are provided for convenience or necessary functionality. We are not
-        responsible for unrelated content, offers or conduct on external websites.
-      </p>
-
-      <h2>21. Intellectual Property</h2>
-      <p>
-        The Coppedskins website, branding, layout, software, databases, text, graphics and original content are
-        owned by or licensed to ULTRASENS and are protected by applicable intellectual property laws.
-      </p>
-      <p>
-        Subject to these Terms, we grant you a limited, personal, revocable, non-exclusive and non-transferable
-        right to access and use the Service for lawful personal purposes.
-      </p>
-      <p>
-        You must not reproduce, modify, distribute, sell, license, reverse engineer or commercially exploit any
-        part of the Service unless expressly permitted by law or authorised by us in writing.
-      </p>
-      <p>
-        No rights in Valve, Steam, Counter-Strike 2 or third-party Digital Item content are transferred to you by
-        ULTRASENS except the limited ability to receive and use the Item through Steam in accordance with the
-        applicable third-party terms.
+        If circumstances beyond our reasonable control prevent fulfilment, we will take reasonable steps to reduce
+        the impact and inform you. Such circumstances do not give us an unlimited extension of time or remove
+        repayment obligations for unfulfilled orders.
       </p>
 
-      <h2>22. Privacy</h2>
-      <p>Personal data is processed in accordance with the Coppedskins Privacy Policy.</p>
-      <p>Depending on how you use the Service, processed data may include:</p>
-      <ul>
-        <li>SteamID and public Steam profile information;</li>
-        <li>Trade URL and public inventory information;</li>
-        <li>Account, Order and Trade Offer records;</li>
-        <li>payment status and limited payment metadata;</li>
-        <li>IP address, approximate location and security logs; and</li>
-        <li>communications with support.</li>
-      </ul>
+      <h2>15. Complaints, governing law and courts</h2>
       <p>
-        We do not receive your Steam password through Steam Login and do not intend to store complete card numbers
-        or card security codes.
+        For an order issue or complaint, email {brand.contact.email} with your order number, the relevant facts and
+        the outcome you seek. We will investigate and explain our response. If a complaint remains unresolved, we
+        will provide information about any alternative dispute resolution arrangements that we are legally required
+        to identify, including whether we are obliged or willing to participate.
       </p>
       <p>
-        Data may be shared with payment service providers, hosting and security providers, professional advisers,
-        authorities where legally required, and digital item supply and fulfilment providers where necessary to
-        complete an Order.
+        These Terms are governed by the laws of England and Wales. If you are a consumer, this choice does not
+        deprive you of mandatory protections available under the law applicable in your country of habitual
+        residence. You may bring proceedings before any court available to you under mandatory consumer
+        jurisdiction rules. Nothing here requires you to use arbitration or prevents you from contacting a
+        competent authority.
+      </p>
+      <p>
+        If a provision cannot be enforced, the remaining provisions continue to apply so far as legally possible. A
+        delay in enforcing a right does not itself waive that right.
       </p>
 
-      <h2>23. Service Availability and Changes</h2>
-      <p>We aim to keep the Service available and accurate, but uninterrupted or error-free operation cannot be guaranteed.</p>
-      <p>
-        We may maintain, update, modify, restrict or discontinue features where reasonably necessary for security,
-        legal compliance, technical operation or business reasons.
-      </p>
-      <p>
-        Where a change materially affects an accepted Order, we will continue to honour the Order or provide an
-        appropriate remedy. Changes to the Service do not remove rights already acquired under a completed purchase
-        contract.
-      </p>
-
-      <h2>24. Disclaimer of Warranties</h2>
-      <p>
-        We will provide the Service with reasonable care and skill and will supply Digital Items in conformity
-        with accepted Orders.
-      </p>
-      <p>Subject to mandatory law, we do not guarantee:</p>
-      <ul>
-        <li>uninterrupted availability of the website or Steam;</li>
-        <li>future transferability or usability of an Item;</li>
-        <li>future market value, demand or rarity;</li>
-        <li>compatibility with future Steam or game updates;</li>
-        <li>that an Item will meet a subjective investment or collection objective; or</li>
-        <li>the continued availability of any particular Item.</li>
-      </ul>
-      <p>Nothing in these Terms excludes any legal guarantee or conformity right that applies to consumers.</p>
-
-      <h2>25. Limitation of Liability</h2>
-      <p>
-        ULTRASENS is responsible for loss or damage that is a reasonably foreseeable result of our breach of these
-        Terms or our failure to exercise legally required care.
-      </p>
-      <p>To the maximum extent permitted by law, we are not responsible for:</p>
-      <ul>
-        <li>losses that were not reasonably foreseeable when the contract was formed;</li>
-        <li>losses caused exclusively by your breach of these Terms;</li>
-        <li>loss resulting from unauthorised access caused by your failure to protect your Steam Account or devices;</li>
-        <li>loss caused by a Steam restriction that we did not cause and could not reasonably prevent;</li>
-        <li>changes in the price, popularity, rarity or transferability of a Digital Item;</li>
-        <li>
-          loss of anticipated profit, revenue or business opportunity where the Service was obtained for personal
-          use; or
-        </li>
-        <li>indirect or consequential loss that applicable law allows us to exclude.</li>
-      </ul>
-      <p>
-        To the maximum extent permitted by law, our aggregate liability arising from an individual Order will not
-        exceed the amount paid to us for that Order.
-      </p>
-      <p>Nothing in these Terms limits or excludes liability for:</p>
-      <ul>
-        <li>fraud or fraudulent misrepresentation;</li>
-        <li>intentional misconduct or gross negligence;</li>
-        <li>death or personal injury where liability cannot lawfully be excluded;</li>
-        <li>failure to supply an accepted and paid Order without providing an appropriate remedy;</li>
-        <li>breach of mandatory consumer rights; or</li>
-        <li>any other liability that cannot lawfully be limited.</li>
-      </ul>
-
-      <h2>26. Complaints</h2>
-      <p>Complaints may be submitted to: {brand.contact.email}</p>
-      <p>Please include, where applicable:</p>
-      <ul>
-        <li>your name;</li>
-        <li>SteamID;</li>
-        <li>Order number;</li>
-        <li>payment date and amount;</li>
-        <li>Trade Offer details;</li>
-        <li>a clear description of the issue; and</li>
-        <li>relevant screenshots or supporting records.</li>
-      </ul>
-      <p>
-        We will review consumer complaints free of charge and provide a reasoned written response as soon as
-        reasonably possible and no later than 14 days after receiving the complaint, where required by Lithuanian
-        law.
-      </p>
-      <p>
-        If a consumer dispute cannot be resolved directly, an eligible consumer may contact the Lithuanian State
-        Consumer Rights Protection Authority:
-      </p>
-      <p>
-        State Consumer Rights Protection Authority
-        <br />
-        A. Goštauto g. 12, LT-01108 Vilnius, Lithuania
-        <br />
-        Website: vvtat.lrv.lt
-      </p>
-      <p>The discontinued European Online Dispute Resolution platform is not used or referenced by Coppedskins.</p>
-
-      <h2>27. Governing Law and Jurisdiction</h2>
-      <p>These Terms and contracts formed under them are governed by the laws of the Republic of Lithuania.</p>
-      <p>
-        If you are a consumer, this choice of law does not deprive you of mandatory protections provided by the
-        laws of the country in which you are habitually resident where those protections apply regardless of the
-        chosen law.
-      </p>
-      <p>
-        Disputes may be submitted to the competent courts of Lithuania, subject to any mandatory right of a
-        consumer to bring or defend proceedings before the courts of their country of residence.
-      </p>
-      <p>
-        Before starting court proceedings, the parties should attempt to resolve the dispute through the
-        complaints process described above, without limiting either party&rsquo;s legal rights or applicable
-        limitation periods.
-      </p>
-
-      <h2>28. Changes to These Terms</h2>
-      <p>We may amend these Terms to reflect:</p>
-      <ul>
-        <li>changes to the Service;</li>
-        <li>changes to Steam functionality;</li>
-        <li>legal or regulatory requirements;</li>
-        <li>security and fraud prevention needs;</li>
-        <li>payment or fulfilment changes; or</li>
-        <li>reasonable business developments.</li>
-      </ul>
-      <p>The updated version will be published on the website with a revised effective date.</p>
-      <p>
-        Material changes will apply prospectively. They will not alter an accepted Order unless required by law or
-        expressly agreed with you.
-      </p>
-      <p>
-        Continued use of the Service after updated Terms take effect constitutes acceptance of the updated Terms
-        where permitted by law. If you do not agree, you must stop using the Service.
-      </p>
-
-      <h2>29. General Provisions</h2>
-      <h3>29.1 Entire Agreement</h3>
-      <p>
-        These Terms, the Privacy Policy, Cookie Policy, Refund, Cancellation and Withdrawal Policy, Digital Item
-        Delivery Policy, and any additional terms shown before payment constitute the agreement between you and
-        ULTRASENS concerning the Service and relevant Orders.
-      </p>
-      <h3>29.2 Order of Precedence</h3>
-      <p>
-        If specific information shown during checkout conflicts with these Terms, the checkout information will
-        apply to that Order to the extent of the conflict. Mandatory law will always prevail.
-      </p>
-      <h3>29.3 Severability</h3>
-      <p>
-        If a provision is found invalid or unenforceable, the remaining provisions will continue to apply. The
-        invalid provision will be interpreted or replaced only to the minimum extent necessary to make it lawful
-        and enforceable.
-      </p>
-      <h3>29.4 No Waiver</h3>
-      <p>A delay or failure to enforce a provision does not waive the right to enforce it later.</p>
-      <h3>29.5 Assignment</h3>
-      <p>You may not transfer your rights or obligations under these Terms without our written consent.</p>
-      <p>
-        We may transfer our rights or obligations as part of a merger, restructuring, business transfer or similar
-        transaction, provided that this does not reduce your mandatory rights.
-      </p>
-      <h3>29.6 Force Majeure</h3>
-      <p>
-        Neither party is responsible for delay caused by events genuinely outside its reasonable control. This
-        does not affect your right to a refund or other mandatory remedy where an Order cannot be completed.
-      </p>
-      <h3>29.7 Electronic Communications</h3>
-      <p>
-        You agree that Order Confirmations, invoices, policies, notices and other transaction communications may
-        be provided electronically through the Service or by email.
-      </p>
-      <h3>29.8 Language</h3>
-      <p>
-        These Terms are prepared in English. Any translation is provided for convenience unless applicable law
-        requires otherwise. Mandatory consumer protections concerning language and transparency remain unaffected.
-      </p>
-
-      <h2>30. Contact</h2>
-      <p>Questions about these Terms or the Service may be sent to:</p>
       <ContactBlock />
     </PolicyLayout>
   );

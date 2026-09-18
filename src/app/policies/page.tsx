@@ -4,12 +4,12 @@ import { Link } from "@/i18n/routing";
 export const metadata = { title: "Policies — Coppedskins" };
 
 const policies = [
-  { label: "Terms and Conditions", href: "/policies/terms" },
+  { label: "Terms & Conditions", href: "/policies/terms" },
+  { label: "Refund & Cancellation Policy", href: "/policies/returns" },
   { label: "Digital Item Delivery Policy", href: "/policies/shipping" },
+  { label: "Payment & Pricing Policy", href: "/policies/payment" },
   { label: "Privacy Policy", href: "/policies/privacy" },
   { label: "Cookie Policy", href: "/policies/cookies" },
-  { label: "Refund, Cancellation and Withdrawal Policy", href: "/policies/returns" },
-  { label: "Payment Policy", href: "/policies/payment" },
 ];
 
 export default function PoliciesIndexPage() {

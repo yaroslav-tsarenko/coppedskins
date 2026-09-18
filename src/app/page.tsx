@@ -52,13 +52,18 @@ const BENEFITS = [
   { tag: "Refund if undelivered", body: "If a trade fails on our side, you get your money back. That is the whole policy." },
 ];
 
+const emptyCatalog = { items: [], total: 0, page: 1, perPage: 0, totalPages: 1 } as const;
+
 export default async function HomePage() {
+  // The catalogue lives in the database. During a build the database may be
+  // unreachable (e.g. no network to Neon); fall back to an empty wall so the
+  // page still prerenders and ISR fills it in on the next revalidation.
   const [fresh, premium, value, knives] = await Promise.all([
     querySihCatalog({ sort: "newest", perPage: 24 }),
     querySihCatalog({ sort: "price_desc", perPage: 12 }),
     querySihCatalog({ sort: "price_asc", perPage: 24 }),
     querySihCatalog({ sort: "price_desc", perPage: 8, categories: ["Knives", "Gloves"] }),
-  ]);
+  ]).catch(() => [emptyCatalog, emptyCatalog, emptyCatalog, emptyCatalog] as const);
 
   // The hero release: the best genuine discount we currently hold, falling
   // back to the newest listing when nothing is marked down.
