@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { env } from "@/lib/env";
 import { encodeSihSlug } from "@/lib/sih/queries";
 import { brand } from "@/lib/brand";
+import { maxSellPriceUsd } from "@/lib/sih/price-cap";
 
 export const dynamic = "force-dynamic";
 
@@ -28,7 +29,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [skins, pages] = await Promise.all([
     prisma.sihItem
       .findMany({
-        where: { isAvailable: true, count: { gt: 0 }, appId: env.SIH_APP_ID },
+        where: {
+          isAvailable: true,
+          count: { gt: 0 },
+          appId: env.SIH_APP_ID,
+          sellPrice: { lte: await maxSellPriceUsd() },
+        },
         select: { marketHashName: true, updatedAt: true },
         orderBy: { sellPrice: "desc" },
         take: 10000,

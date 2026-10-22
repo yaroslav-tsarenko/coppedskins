@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { env } from "@/lib/env";
 import type { ExteriorCode } from "@/lib/skins/shared";
 import { sihImageUrl } from "./image";
+import { maxSellPriceUsd } from "./price-cap";
 
 // Catalog reads over sih_items. Only rows that are available AND in stock
 // (count > 0) are sellable. Prices come straight off sync (sellPrice), so the
@@ -84,11 +85,19 @@ function discount(sell: number, steam: number | null): number | null {
   return Math.round(((steam - sell) / steam) * 100);
 }
 
-export function buildSihWhere(f: SihCatalogFilters): Prisma.SihItemWhereInput {
+export function buildSihWhere(
+  f: SihCatalogFilters,
+  capUsd: number,
+): Prisma.SihItemWhereInput {
   const where: Prisma.SihItemWhereInput = {
     isAvailable: true,
     count: { gt: 0 },
     appId: env.SIH_APP_ID,
+    // Never list anything above the store price cap, whatever the filter says.
+    sellPrice: {
+      lte: Math.min(f.priceMax ?? Infinity, capUsd),
+      ...(f.priceMin != null && { gte: f.priceMin }),
+    },
   };
   if (f.search) where.marketHashName = { contains: f.search, mode: "insensitive" };
   if (f.weapons?.length) where.weapon = { in: f.weapons };
@@ -97,11 +106,6 @@ export function buildSihWhere(f: SihCatalogFilters): Prisma.SihItemWhereInput {
   if (f.exteriors?.length) where.exterior = { in: f.exteriors };
   if (f.statTrak) where.isStatTrak = true;
   if (f.souvenir) where.isSouvenir = true;
-  if (f.priceMin != null || f.priceMax != null) {
-    where.sellPrice = {};
-    if (f.priceMin != null) where.sellPrice.gte = f.priceMin;
-    if (f.priceMax != null) where.sellPrice.lte = f.priceMax;
-  }
   return where;
 }
 
@@ -167,7 +171,7 @@ const CARD_SELECT = {
 export async function querySihCatalog(f: SihCatalogFilters): Promise<SihCatalogResult> {
   const page = Math.max(1, f.page ?? 1);
   const perPage = Math.min(96, Math.max(12, f.perPage ?? 48));
-  const where = buildSihWhere(f);
+  const where = buildSihWhere(f, await maxSellPriceUsd());
   const orderBy = SORT_MAP[f.sort ?? "price_asc"] ?? SORT_MAP.price_asc;
 
   const [rows, total] = await Promise.all([
@@ -202,6 +206,7 @@ export async function getSihFacets(): Promise<SihFacets> {
     isAvailable: true,
     count: { gt: 0 },
     appId: env.SIH_APP_ID,
+    sellPrice: { lte: await maxSellPriceUsd() },
   };
   const [cats, weapons, rarities] = await Promise.all([
     prisma.sihItem.findMany({
@@ -251,7 +256,7 @@ export async function getSihItemBySlug(slug: string): Promise<SihItemDetail | nu
       isAvailable: true,
     },
   });
-  if (!row) return null;
+  if (!row || Number(row.sellPrice) > (await maxSellPriceUsd())) return null;
   const base = toSihCatalogItem(row);
   return {
     ...base,
@@ -269,6 +274,7 @@ export async function getSihRelated(item: SihCatalogItem, limit = 6): Promise<Si
     count: { gt: 0 },
     appId: env.SIH_APP_ID,
     marketHashName: { not: item.marketHashName },
+    sellPrice: { lte: await maxSellPriceUsd() },
   };
   const rows = await prisma.sihItem.findMany({
     where: item.weapon ? { ...base, weapon: item.weapon } : { ...base, category: item.category },
