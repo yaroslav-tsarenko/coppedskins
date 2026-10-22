@@ -6,6 +6,7 @@ import { TransfermitAPI } from "@/lib/payments/transfermit";
 import { sendAlert } from "@/lib/alerts/telegram";
 import { sihClient } from "./client";
 import { computeSellPrice, round2 } from "./pricing";
+import { maxSellPriceUsd } from "./price-cap";
 import { logSihEvent, applySihOrderObject } from "./orders";
 import { SihError, userMessageForSih } from "./errors";
 
@@ -125,6 +126,10 @@ export async function createSihCheckout(
   const costPrice = liveCost;
   const shownPrice = grew ? computeSellPrice(liveCost) : Number(item.sellPrice);
   const margin = round2(shownPrice - costPrice);
+
+  if (shownPrice > (await maxSellPriceUsd())) {
+    throw new CheckoutError("item_unavailable", "This item is no longer available.");
+  }
 
   // Keep the catalog row honest if the price/stock moved.
   if (grew || liveCount !== item.count) {
